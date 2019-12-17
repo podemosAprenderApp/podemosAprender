@@ -1,1 +1,1 @@
-web: gunicorn podemosaprenderapp.wsgi --log-file -
+web: gunicorn PodemosAprenderApp.wsgi --log-file -
