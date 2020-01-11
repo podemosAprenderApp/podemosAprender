@@ -1,5 +1,5 @@
 class Permiso:
-    def __init__(self, texto):
-        self.texto = texto
+    def __init__(self, texto) -> None:
+        self.texto: str = texto
 
 

@@ -1,12 +1,16 @@
-class Puntuacion:
-    def __init__(self, esPositiva, comentario, respuesta, autor):
-        self.esPositiva = esPositiva
-        self.comentario = comentario
-        self.respuesta = respuesta
-        self.autor = autor
+from domain.Bandas import Usuario
+from domain.Reaccionables.Comentario import Comentario
 
-    def responder(self, comentario):
+
+class Puntuacion:
+    def __init__(self, es_positiva: bool, comentario: Comentario, respuesta: Comentario, autor: Usuario) -> None:
+        self.es_positiva: bool = es_positiva
+        self.comentario: Comentario = comentario
+        self.respuesta: Comentario = respuesta
+        self.autor: Usuario = autor
+
+    def responder(self, comentario: Comentario) -> None:
         self.respuesta = comentario
 
-    def comentar(self, comentario):
+    def comentar(self, comentario: Comentario) -> None:
         self.comentario = comentario

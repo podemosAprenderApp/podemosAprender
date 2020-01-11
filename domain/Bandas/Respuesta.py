@@ -1,6 +1,12 @@
+from datetime import datetime
+
+from domain.Bandas.Membresia import Membresia
+from domain.Bandas.Pregunta import Pregunta
+
+
 class Respuesta:
-    def __init__(self, usuario, texto, pregunta, fecha):
-        self.usuario = usuario
-        self.texto = texto
-        self.pregunta = pregunta
-        self.fecha = fecha
+    def __init__(self, membresia: Membresia, texto: str, pregunta: Pregunta, fecha: datetime) -> None:
+        self.membresia: Membresia = membresia
+        self.texto: str = texto
+        self.pregunta: Pregunta = pregunta
+        self.fecha: datetime = fecha

@@ -1,3 +1,3 @@
 class TipoReaccion:
-    def __init__(self, texto: object) -> object:
-        self.texto = texto
+    def __init__(self, texto: str) -> None:
+        self.texto: str = texto

@@ -3,7 +3,7 @@ from domain.Roles.Permiso import Permiso
 
 
 class Admin (Miembro):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         super().permisos.extend([Permiso("Agregar regla"),
                                  Permiso("Remover regla"),
