@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+<body>
+<p>Parrafo html</p>
+<script>
+    fetch('http://localhost:9000/api/bandas')
+    .then(respuesta => respuesta.json())
+    .then(json => console.log(json));
+</script>
+</body>
+</html>
