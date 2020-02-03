@@ -1,7 +1,7 @@
 # podemosAprender
 Proyecto de App podemosAprender
 
-Se puede encontrar el deploy acá: https://podemosaprenderapp.herokuapp.com/
+Se puede encontrar el deploy acá: https://podemosaprenderapp.herokuapp.com/ (estamos en medio de migraciones y el link puede no funcionar)
 
  -Miembros que tienen HABILIDADES e INTERESES, detallando por qué te interesan o qué te propusiste aprender.
 
