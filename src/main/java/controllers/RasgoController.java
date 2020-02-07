@@ -2,6 +2,7 @@ package controllers;
 
 import entities.usuarios.Usuario;
 import entities.usuarios.reaccionables.rasgos.Rasgo;
+import entities.usuarios.reaccionables.rasgos.RasgoValidable;
 import repositories.Repositorio;
 import spark.Request;
 import spark.Response;
@@ -58,5 +59,31 @@ public class RasgoController extends Controller {
         repo.modificar(usuario);
         response.redirect("/");
         return response;
+    }
+
+    public List<RasgoValidable> buscarValidables(Request request, Response response){
+        int idUsuario = Integer.parseInt(request.params(":idUsuario"));
+        Usuario usuario = repo.buscar(idUsuario, Usuario.class);
+        return usuario.getRasgosValidables();
+    }
+
+    public RasgoValidable buscarValidable(Request request, Response response){
+        int idUsuario = Integer.parseInt(request.params(":idUsuario"));
+        Usuario usuario = repo.buscar(idUsuario, Usuario.class);
+        int id = Integer.parseInt(request.params(":id"));
+        return usuario.getRasgosValidables()
+                .stream()
+                .filter(r -> r.getId() == id).findFirst()
+                .orElseThrow(NoSuchFieldError::new);
+    }
+
+    public Rasgo buscarPorUsuario(Request request, Response response){
+        int idUsuario = Integer.parseInt(request.params(":idUsuario"));
+        Usuario usuario = repo.buscar(idUsuario, Usuario.class);
+        int id = Integer.parseInt(request.params(":id"));
+        return usuario.getRasgos()
+                .stream()
+                .filter(r -> r.getId() == id).findFirst()
+                .orElseThrow(NoSuchFieldError::new);
     }
 }

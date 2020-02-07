@@ -2,7 +2,6 @@ import entities.banda.Banda;
 import entities.banda.Pregunta;
 import entities.banda.Regla;
 import entities.banda.eventos.Evento;
-import entities.banda.eventos.invitaciones.Invitacion;
 import entities.banda.eventos.visibilidades.Publico;
 import entities.membresia.Etiqueta;
 import entities.membresia.Membresia;
@@ -19,39 +18,37 @@ import entities.usuarios.reaccionables.TipoReaccion;
 import entities.usuarios.reaccionables.rasgos.*;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TestBasicObjects {
-    protected Expertise expertise;
-    protected TipoExpertise tipoExpertise;
-    protected Rasgo rasgo;
-    protected Rol adm, user;
-    protected RasgoValidable rasgoValidable;
-    protected Usuario jorge, tobias;
-    protected TipoReaccion meDivierte, meEnoja;
-    protected Reaccion reaccionEnojada, reaccionDeJorge;
-    protected Puntuacion puntuacion;
-    protected Topico dev, venderGall;
-    protected Comentario comentario, respuesta;
-    protected Regla serAmable, traerPC;
-    protected Pregunta cualEsTuAnimal;
-    protected Usuario dario, noe, lean, mercedes, dani, pipi;
-    protected Membresia memDaro, memNoe, memLean, memMer, memDani, memPipi;
-    protected EstadoMembresia aprobado;
-    protected Evento evento;
-    protected Banda bandaPodemosAprender;
-    protected Respuesta miAnimalFavorito1, miAnimalFavorito2, miAnimalFavorito3, miAnimalFavorito4, miAnimalFavorito5
+    Expertise expertise;
+    TipoExpertise tipoExpertise;
+    Rasgo rasgo;
+    Rol adm, user;
+    RasgoValidable rasgoValidable;
+    Usuario jorge, tobias;
+    TipoReaccion meDivierte, meEnoja;
+    Reaccion reaccionEnojada, reaccionDeJorge;
+    Puntuacion puntuacion;
+    Topico dev, venderGall;
+    Comentario comentario, respuesta;
+    Regla serAmable, traerPC;
+    Pregunta cualEsTuAnimal;
+    Usuario dario, noe, lean, mercedes, dani, pipi;
+    Membresia memDaro, memNoe, memLean, memMer, memDani, memPipi;
+    EstadoMembresia aprobado;
+    Evento evento;
+    Banda bandaPodemosAprender;
+    Respuesta miAnimalFavorito1, miAnimalFavorito2, miAnimalFavorito3, miAnimalFavorito4, miAnimalFavorito5
             , miAnimalFavorito6;
-    protected Etiqueta cocinero;
-    protected Post post;
+    Etiqueta cocinero;
+    Post post;
 
     @BeforeEach
     public void init() {
         evento = new Evento(LocalDateTime.now(), "Juntada Loca", "Vamos a codear a lo loco",
                 new ArrayList<>(), "Grand View Hotel (maps)", new Publico());
-        post = new Post("Hice una bocha y te lo cuento (T!)", new ArrayList<>());
         cocinero = new Etiqueta("Cocinero");
         comentario = new Comentario(LocalDateTime.now(), "Que tipazo");
         respuesta = new Comentario(LocalDateTime.now(), "Gracias che");
@@ -65,6 +62,8 @@ public class TestBasicObjects {
             add(rasgo);
         }},
                 "Jorge", "jorgecapo", "estoNoEsUnHash");
+        post = new Post("Hice una bocha y te lo cuento (T!)", new ArrayList<>(), jorge);
+
         tobias = new Usuario(LocalDateTime.now(), new ArrayList<Rasgo>() {{
             add(rasgoValidable);
         }},

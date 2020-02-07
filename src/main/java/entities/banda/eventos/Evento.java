@@ -22,7 +22,7 @@ public class Evento extends EntidadPersistente {
     private List<Invitacion> invitaciones;
     @Column(name = "locacion") @Expose
     private String locacion;
-    @OneToOne(cascade = CascadeType.ALL) @Expose
+    @OneToOne(cascade = CascadeType.ALL)
     private Visibilidad visible;
 
     public Evento(LocalDateTime fecha, String titulo, String contenido, List<Invitacion> invitaciones, String locacion, Visibilidad visible) {

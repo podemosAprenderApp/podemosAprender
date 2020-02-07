@@ -1,9 +1,9 @@
 import static db.EntityManagerHelper.*;
 import org.junit.jupiter.api.Test;
 
-public class PersistenceTest extends TestBasicObjects {
+class PersistenceTest extends TestBasicObjects {
     @Test
-    public void persistenciaInicial(){
+    void persistenciaInicial(){
         beginTransaction();
 
         getEntityManager().persist(serAmable);

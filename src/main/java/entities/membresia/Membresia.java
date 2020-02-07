@@ -12,8 +12,9 @@ import java.util.List;
 @Entity
 @Table(name = "membresias")
 public class Membresia extends EntidadPersistente {
-    @ManyToOne @Expose
+    @ManyToOne
     @JoinColumn(name = "usuario_id", insertable = false, updatable = false)
+    @Expose
     private Usuario usuario;
     @OneToOne @Expose
     private EstadoMembresia estado;

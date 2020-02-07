@@ -38,22 +38,70 @@ class Router {
     private static void setRoutes(){
         setPages();
         path("/api", () -> {
-            before((request, response) -> {{
-                response.header("encoding","UTF8");
-            }});
+            before((request, response) -> response.header("Accept-Charset", "UTF-8"));
+            setRasgo();
             setUsuario();
             setBanda();
-            setRasgo();
             setTopico();
-            after((request, response) -> {
-                response.header("Content-Encoding", "gzip");
-            });
+            setMembresia();
+            setPregunta();
+            setReglas();
+            setEventos();
+            setInvitaciones();
+            setEtiquetas();
+            setPosts();
+            after((request, response) -> response.header("Content-Encoding", "gzip"));
         });
+    }
+
+    private static void setPosts() {
+        final PostController posts = new PostController(repo);
+        before((request, response) -> response.type("application/json; charset=utf-8"));
+        get("/posts", posts::buscarTodos, toJson());
+        get("/post/id", posts::buscar, toJson());
+        get("/banda/:idBanda/posts", posts::buscarTodosPorBanda, toJson());
+        get( "/banda/:idBanda/post/:id", posts::buscarPorBanda, toJson());
+    }
+
+    private static void setEtiquetas() {
+        final EtiquetaController eitquetas = new EtiquetaController(repo);
+        before((request, response) -> response.type("application/json; charset=utf-8"));
+        get("/etiquetas", eitquetas::buscarTodos, toJson());
+        get("/etiqueta/:id", eitquetas::buscar, toJson());
+        get("/membresia/:idMembresia/etiquetas", eitquetas::buscarTodosPorMembresia, toJson());
+        get( "/membresia/:idMembresia/etiqueta/:id", eitquetas::buscarPorMembresia, toJson());
+    }
+
+    private static void setInvitaciones() {
+        final InvitacionController invitaciones = new InvitacionController(repo);
+        before((request, response) -> response.type("application/json; charset=utf-8"));
+        get("/invitaciones", invitaciones::buscarTodos, toJson());
+        get("/invitacion/:id", invitaciones::buscar, toJson());
+        get("/evento/:idEvento/invitaciones", invitaciones::buscarTodosPorEvento, toJson());
+        get( "/evento/:idEvento/invitacion/:id", invitaciones::buscarPorEvento, toJson());
+    }
+
+    private static void setEventos() {
+        final EventoController eventos = new EventoController(repo);
+        before((request, response) -> response.type("application/json; charset=utf-8"));
+        get("/evento", eventos::buscarTodos, toJson());
+        get("/evento/:id", eventos::buscar, toJson());
+        get("/banda/:idBanda/eventos", eventos::buscarTodosPorBanda, toJson());
+        get( "/banda/:idBanda/evento/:id", eventos::buscarPorBanda, toJson());
+    }
+
+    private static void setReglas() {
+        final ReglaController reglas = new ReglaController(repo);
+        before((request, response) -> response.type("application/json; charset=utf-8"));
+        get("/reglas", reglas::buscarTodos, toJson());
+        get("/regla/:id", reglas::buscar, toJson());
+        get("/banda/:idBanda/reglas", reglas::buscarTodosPorBanda, toJson());
+        get( "/banda/:idBanda/regla/:id", reglas::buscarPorBanda, toJson());
     }
 
     private static void setUsuario(){
         final UsuarioController usuarios = new UsuarioController(repo);
-        before((request, response) -> response.type("application/json"));
+        before((request, response) -> response.type("application/json; charset=utf-8"));
         get("/usuarios", usuarios::buscarTodos, toJson());
         get("/usuario/:id", usuarios::buscar, toJson());
         post("/usuario", usuarios::agregar);
@@ -78,17 +126,38 @@ class Router {
         delete("/banda/:id" , bandas::eliminar);
     }
 
-    public static void setRasgo(){
+    private static void setRasgo(){
         final RasgoController rasgos = new RasgoController(repo);
         before((request, response) -> response.type("application/json"));
         get("/rasgos", rasgos::buscarTodos, toJson());
-        get("/rasgo/:id",rasgos::buscar, toJson());
+        get("/rasgo/:id", rasgos::buscar, toJson());
+        get("/usuario/:idUsuario/rasgos", rasgos::buscarTodosPorUsuario, toJson());
+        get("/usuario/:idUsuario/rasgo/:id",rasgos::buscarPorUsuario, toJson());
+        get("/usuario/:idUsuario/rasgovalidable/:id",rasgos::buscarValidable, toJson());
+        get("/usuario/:idUsuario/rasgosvalidables",rasgos::buscarValidables, toJson());
+
     }
 
-    public static void setTopico(){
+    private static void setTopico(){
         final TopicoController topicos = new TopicoController((repo));
         before((request, response) -> response.type("application/json"));
         get("/topicos", topicos::buscarTodos, toJson());
         get("/topico/:id",topicos::buscar, toJson());
+    }
+
+    private static void setMembresia(){
+        final MembresiaController membresias = new MembresiaController(repo);
+        before((request, response) -> response.type("application/json"));
+        get("/membresias", membresias::buscarTodos, toJson());
+        get("/membresia/:id",membresias::buscar, toJson());
+    }
+
+    private static void setPregunta(){
+        final PreguntaController preguntas = new PreguntaController(repo);
+        before((request, response) -> response.type("application/json"));
+        get("/preguntas", preguntas::buscarTodos, toJson());
+        get("/pregunta/:id", preguntas::buscar, toJson());
+        get("/banda/:idBanda/pregunta/:id", preguntas::buscarPorBanda, toJson());
+        get("/banda/:idBanda/preguntas", preguntas::buscarTodosPorBanda, toJson());
     }
 }
