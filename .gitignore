@@ -8,3 +8,4 @@ env/
 .vscode/
 Pipfile
 /.idea/
+target
