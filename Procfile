@@ -1,1 +1,1 @@
-web: java -cp target/classes/:target/dependency/*
+web: java -jar target/podemosAprender-1.0-SNAPSHOT-jar-with-dependencies.jar
